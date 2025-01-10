@@ -16,7 +16,7 @@ function Inbox() {
   }, []);
 
   useEffect(() => {
-    const socket = io.connect("http://localhost:3000");
+    const socket = io.connect(`${import.meta.env.VITE_PROD_URL}`);
     socket.on("m", () => {
       console.log("connected to server");
     });
@@ -33,7 +33,7 @@ function Inbox() {
   async function getMessages() {
     try {
       const res = await fetch(
-        `http://localhost:3000/users/${userId}/messages`,
+        `${import.meta.env.VITE_PROD_URL}/users/${userId}/messages`,
         {
           method: "GET",
           headers: {

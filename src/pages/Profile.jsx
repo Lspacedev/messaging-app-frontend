@@ -18,13 +18,16 @@ function Profile() {
   }, []);
   async function getProfile() {
     try {
-      const res = await fetch(`http://localhost:3000/users/${userId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_PROD_URL}/users/${userId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const data = await res.json();
       setUsername(data.user.username);
@@ -43,14 +46,17 @@ function Profile() {
         return;
       }
       setLoading(true);
-      const res = await fetch(`http://localhost:3000/users/${userId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ username, email }),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_PROD_URL}/users/${userId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ username, email }),
+        }
+      );
 
       const data = await res.json();
       if (res.ok) {

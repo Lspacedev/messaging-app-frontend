@@ -17,7 +17,7 @@ function Message() {
   }, []);
 
   useEffect(() => {
-    const socket = io.connect("http://localhost:3000");
+    const socket = io.connect(`${import.meta.env.VITE_PROD_URL}`);
 
     socket.on("connnection", () => {
       console.log("connected to server");
@@ -34,7 +34,7 @@ function Message() {
   async function getMessage() {
     try {
       const res = await fetch(
-        `http://localhost:3000/users/${userId}/messages/${uid}`,
+        `${import.meta.env.VITE_PROD_URL}/users/${userId}/messages/${uid}`,
         {
           method: "GET",
           headers: {

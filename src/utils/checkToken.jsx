@@ -6,14 +6,17 @@ const parseJwt = async (token, refresh) => {
   if (expTime - twoMin < new Date().getTime()) {
     const userId = localStorage.getItem("userId");
     try {
-      const res = await fetch(`http://localhost:3000/users/${userId}/status`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ login: false }),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_PROD_URL}/users/${userId}/status`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ login: false }),
+        }
+      );
 
       localStorage.clear("token");
       refresh();

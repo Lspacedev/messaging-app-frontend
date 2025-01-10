@@ -17,7 +17,7 @@ function FriendDetails({ friend }) {
   async function getUsers() {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:3000/users`, {
+      const res = await fetch(`${import.meta.env.VITE_PROD_URL}/users`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

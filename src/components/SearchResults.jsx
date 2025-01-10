@@ -30,7 +30,7 @@ function SearchResults() {
   }, []);
   async function getUsers() {
     try {
-      const res = await fetch(`http://localhost:3000/users`, {
+      const res = await fetch(`${import.meta.env.VITE_PROD_URL}/users`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -58,14 +58,17 @@ function SearchResults() {
   }
   async function addFriend(id) {
     try {
-      const res = await fetch(`http://localhost:3000/users/${userId}/friends`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ friendId: id }),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_PROD_URL}/users/${userId}/friends`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ friendId: id }),
+        }
+      );
 
       const data = await res.json();
 

@@ -23,13 +23,16 @@ function Groups() {
 
   async function getFriends() {
     try {
-      const res = await fetch(`http://localhost:3000/users/${userId}/friends`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_PROD_URL}/users/${userId}/friends`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const data = await res.json();
 
@@ -42,13 +45,16 @@ function Groups() {
   }
   async function getMessages() {
     try {
-      const res = await fetch(`http://localhost:3000/users/${userId}/groups`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_PROD_URL}/users/${userId}/groups`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const data = await res.json();
 
@@ -70,15 +76,18 @@ function Groups() {
         alert("No members to add");
         return;
       }
-      const res = await fetch(`http://localhost:3000/users/${userId}/groups`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Content-Length": 0,
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ groupName, members }),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_PROD_URL}/users/${userId}/groups`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Content-Length": 0,
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ groupName, members }),
+        }
+      );
 
       if (res.ok) {
         //const data = await res.json();

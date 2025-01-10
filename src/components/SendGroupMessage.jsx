@@ -22,7 +22,7 @@ function SendGroupMessage() {
     }
     try {
       const res = await fetch(
-        `http://localhost:3000/users/${userId}/groups/${groupId}`,
+        `${import.meta.env.VITE_PROD_URL}/users/${userId}/groups/${groupId}`,
         {
           method: "POST",
           headers: {

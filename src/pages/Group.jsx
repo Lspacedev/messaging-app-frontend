@@ -19,7 +19,7 @@ function Group() {
   }, []);
 
   useEffect(() => {
-    const socket = io.connect("http://localhost:3000");
+    const socket = io.connect(`${import.meta.env.VITE_PROD_URL}`);
 
     socket.on("connnection", () => {
       console.log("connected to server");
@@ -36,7 +36,7 @@ function Group() {
   async function getGroup() {
     try {
       const res = await fetch(
-        `http://localhost:3000/users/${userId}/groups/${groupId}`,
+        `${import.meta.env.VITE_PROD_URL}/users/${userId}/groups/${groupId}`,
         {
           method: "GET",
           headers: {
@@ -58,7 +58,7 @@ function Group() {
 
   async function getUsers() {
     try {
-      const res = await fetch(`http://localhost:3000/users`, {
+      const res = await fetch(`${import.meta.env.VITE_PROD_URL}/users`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

@@ -22,7 +22,7 @@ function FrdContainer({ friend }) {
   async function goToMessage() {
     try {
       const res = await fetch(
-        `http://localhost:3000/users/${friend.friendId}/messages`,
+        `${import.meta.env.VITE_PROD_URL}/users/${friend.friendId}/messages`,
         {
           method: "POST",
           headers: {
@@ -44,7 +44,7 @@ function FrdContainer({ friend }) {
   async function deleteFriend(id) {
     try {
       const res = await fetch(
-        `http://localhost:3000/users/${userId}/friends/${id}`,
+        `${import.meta.env.VITE_PROD_URL}/users/${userId}/friends/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -66,7 +66,7 @@ function FrdContainer({ friend }) {
   async function getUsers() {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:3000/users`, {
+      const res = await fetch(`${import.meta.env.VITE_PROD_URL}/users`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

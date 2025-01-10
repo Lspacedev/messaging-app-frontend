@@ -11,7 +11,7 @@ function GrpContainer({ group }) {
   return (
     <div className="GrpContainer" onClick={goToGroup}>
       <MdOutlineGroups2 fontSize="3rem" />
-      <h4>{group.groupName}</h4>
+      <h4>{group && group.groupName}</h4>
       <div>{group && new Date(group.timestamp).toDateString()}</div>
     </div>
   );

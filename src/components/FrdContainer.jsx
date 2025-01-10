@@ -21,6 +21,8 @@ function FrdContainer({ friend }) {
   const userId = localStorage.getItem("userId");
   async function goToMessage() {
     try {
+      setLoading(true);
+
       const res = await fetch(
         `${import.meta.env.VITE_PROD_URL}/users/${friend.friendId}/messages`,
         {
@@ -33,16 +35,19 @@ function FrdContainer({ friend }) {
         }
       );
       const data = await res.json();
-      navigation(`/home/inbox/${data.id}`);
+      setLoading(false);
 
-      //setLoading(false);
+      navigation(`/home/inbox/${data.id}`);
     } catch (err) {
       console.log(err);
       //setErr(err.message)
+      setLoading(false);
     }
   }
   async function deleteFriend(id) {
     try {
+      setLoading(true);
+
       const res = await fetch(
         `${import.meta.env.VITE_PROD_URL}/users/${userId}/friends/${id}`,
         {

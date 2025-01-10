@@ -5,7 +5,7 @@ import io from "socket.io-client";
 
 function Inbox() {
   const [messages, setMessages] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
   const { uid } = useParams();
@@ -31,6 +31,8 @@ function Inbox() {
   }, []);
 
   async function getMessages() {
+    setLoading(true);
+
     try {
       const res = await fetch(
         `${import.meta.env.VITE_PROD_URL}/users/${userId}/messages`,
@@ -49,6 +51,7 @@ function Inbox() {
     } catch (err) {
       console.log(err);
       setErr(err.message);
+      setLoading(false);
     }
   }
   if (loading) return <div>Loading...</div>;
@@ -57,7 +60,7 @@ function Inbox() {
     <div className="Inbox">
       {typeof uid === "undefined" ? (
         <div className="messages">
-          {messages.length > 0 ? (
+          {messages && messages.length > 0 ? (
             messages.map((message, i) => (
               <MsgContainer key={i} message={message} />
             ))

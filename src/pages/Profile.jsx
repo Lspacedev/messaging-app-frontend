@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
   const [edit, setEdit] = useState(false);
   const [username, setUsername] = useState("");
@@ -18,6 +18,8 @@ function Profile() {
   }, []);
   async function getProfile() {
     try {
+      setLoading(true);
+
       const res = await fetch(
         `${import.meta.env.VITE_PROD_URL}/users/${userId}`,
         {
@@ -37,6 +39,7 @@ function Profile() {
     } catch (err) {
       console.log(err);
       setErr(err.message);
+      setLoading(false);
     }
   }
   async function updateProfile() {
@@ -82,7 +85,7 @@ function Profile() {
         </button>
       )}
       {!edit ? (
-        <div>Username: {user.username}</div>
+        <div>Username: {user && user.username}</div>
       ) : (
         <div className="input-div">
           Username:
@@ -94,7 +97,7 @@ function Profile() {
         </div>
       )}
       {!edit ? (
-        <div>Email: {user.email}</div>
+        <div>Email: {user && user.email}</div>
       ) : (
         <div className="input-div">
           Email:

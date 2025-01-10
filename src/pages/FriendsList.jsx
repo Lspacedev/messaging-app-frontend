@@ -3,7 +3,7 @@ import FrdContainer from "../components/FrdContainer";
 import parseJwt from "../utils/checkToken";
 function FriendsList() {
   const [friends, setFriends] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
   const userId = localStorage.getItem("userId");
@@ -13,6 +13,8 @@ function FriendsList() {
   }, []);
   async function getFriends() {
     try {
+      setLoading(true);
+
       const res = await fetch(
         `${import.meta.env.VITE_PROD_URL}/users/${userId}/friends`,
         {
@@ -30,6 +32,7 @@ function FriendsList() {
     } catch (err) {
       console.log(err);
       setErr(err.message);
+      setLoading(false);
     }
   }
 
@@ -37,7 +40,7 @@ function FriendsList() {
   if (err !== "") return <div>{err}</div>;
   return (
     <div className="FriendsList">
-      {friends.length > 0 ? (
+      {friends && friends.length > 0 ? (
         <div className="friends">
           {friends.map((friend, i) => (
             <FrdContainer key={i} friend={friend} />

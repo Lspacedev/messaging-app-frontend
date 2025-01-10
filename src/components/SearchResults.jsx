@@ -8,7 +8,7 @@ function SearchResults() {
   const [userFriends, setUserFriends] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
@@ -30,6 +30,8 @@ function SearchResults() {
   }, []);
   async function getUsers() {
     try {
+      setLoading(true);
+
       const res = await fetch(`${import.meta.env.VITE_PROD_URL}/users`, {
         method: "GET",
         headers: {
@@ -47,6 +49,7 @@ function SearchResults() {
     } catch (err) {
       console.log(err);
       setErr(err.message);
+      setLoading(false);
     }
   }
   function closeSearchMenu() {
@@ -58,6 +61,8 @@ function SearchResults() {
   }
   async function addFriend(id) {
     try {
+      setLoading(true);
+
       const res = await fetch(
         `${import.meta.env.VITE_PROD_URL}/users/${userId}/friends`,
         {
@@ -77,6 +82,7 @@ function SearchResults() {
     } catch (err) {
       console.log(err);
       setErr(err.message);
+      setLoading(false);
     }
   }
   function isFriend(id) {
@@ -92,7 +98,7 @@ function SearchResults() {
       </div>
       <SearchBar search={search} />
       <div className="results">
-        {searchResults.length !== 0 ? (
+        {searchResults && searchResults.length !== 0 ? (
           searchResults.map((user, i) => (
             <div className="user" key={i}>
               <div
@@ -114,7 +120,9 @@ function SearchResults() {
               )}
             </div>
           ))
-        ) : searchResults.length === 0 && searchTerm.length > 0 ? (
+        ) : searchResults &&
+          searchResults.length === 0 &&
+          searchTerm.length > 0 ? (
           <div>User not found</div>
         ) : (
           <div> </div>

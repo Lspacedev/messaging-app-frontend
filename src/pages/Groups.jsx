@@ -10,7 +10,7 @@ function Groups() {
   const [groupName, setGroupName] = useState("");
 
   const [add, setAdd] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
   const { groupId } = useParams();
@@ -22,6 +22,8 @@ function Groups() {
   }, []);
 
   async function getFriends() {
+    setLoading(true);
+
     try {
       const res = await fetch(
         `${import.meta.env.VITE_PROD_URL}/users/${userId}/friends`,
@@ -41,9 +43,11 @@ function Groups() {
     } catch (err) {
       console.log(err);
       setErr(err.message);
+      setLoading(false);
     }
   }
   async function getMessages() {
+    setLoading(true);
     try {
       const res = await fetch(
         `${import.meta.env.VITE_PROD_URL}/users/${userId}/groups`,
@@ -63,6 +67,7 @@ function Groups() {
     } catch (err) {
       console.log(err);
       setErr(err.message);
+      setLoading(false);
     }
   }
 
@@ -76,6 +81,8 @@ function Groups() {
         alert("No members to add");
         return;
       }
+      setLoading(true);
+
       const res = await fetch(
         `${import.meta.env.VITE_PROD_URL}/users/${userId}/groups`,
         {
@@ -92,6 +99,8 @@ function Groups() {
       if (res.ok) {
         //const data = await res.json();
         setAdd(false);
+        setLoading(false);
+
         navigation(0);
       }
 
@@ -99,6 +108,7 @@ function Groups() {
     } catch (err) {
       console.log(err);
       //setErr(err.message)
+      setLoading(false);
     }
   }
   if (loading) return <div>Loading...</div>;
@@ -128,7 +138,7 @@ function Groups() {
                   <div className="friendsList">
                     <div>Add friends</div>
 
-                    {friends.length > 0 ? (
+                    {friends && friends.length > 0 ? (
                       friends.map((friend, i) => (
                         <div key={i} className="check">
                           <input
@@ -150,7 +160,7 @@ function Groups() {
             </div>
           )}
           <div className="groups">
-            {groups.length > 0 ? (
+            {groups && groups.length > 0 ? (
               groups.map((group, i) => <GrpContainer key={i} group={group} />)
             ) : (
               <div>No groups</div>

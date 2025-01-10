@@ -7,7 +7,7 @@ import io from "socket.io-client";
 function Group() {
   const [group, setGroup] = useState({});
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
   const { groupId } = useParams();
 
@@ -35,6 +35,8 @@ function Group() {
   }, []);
   async function getGroup() {
     try {
+      setLoading(true);
+
       const res = await fetch(
         `${import.meta.env.VITE_PROD_URL}/users/${userId}/groups/${groupId}`,
         {
@@ -53,11 +55,14 @@ function Group() {
     } catch (err) {
       console.log(err);
       setErr(err.message);
+      setLoading(false);
     }
   }
 
   async function getUsers() {
     try {
+      setLoading(true);
+
       const res = await fetch(`${import.meta.env.VITE_PROD_URL}/users`, {
         method: "GET",
         headers: {
@@ -75,6 +80,7 @@ function Group() {
     } catch (err) {
       console.log(err);
       setErr(err.message);
+      setLoading(false);
     }
   }
 
@@ -94,6 +100,7 @@ function Group() {
 
       <div className="texts">
         {JSON.stringify(group) !== "{}" &&
+        group &&
         group.groupMessages &&
         group.groupMessages.length > 0 ? (
           group.groupMessages.map((message, i) => (

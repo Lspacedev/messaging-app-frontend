@@ -6,7 +6,7 @@ import io from "socket.io-client";
 
 function Message() {
   const [message, setMessage] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
   const { uid } = useParams();
 
@@ -33,6 +33,8 @@ function Message() {
   }, []);
   async function getMessage() {
     try {
+      setLoading(true);
+
       const res = await fetch(
         `${import.meta.env.VITE_PROD_URL}/users/${userId}/messages/${uid}`,
         {
@@ -50,6 +52,7 @@ function Message() {
     } catch (err) {
       console.log(err);
       setErr(err.message);
+      setLoading(false);
     }
   }
 
@@ -59,13 +62,13 @@ function Message() {
     <div className="Message">
       <div className="message-header">
         <div className="message-name">
-          {message.senderId === Number(userId)
+          {message && message.senderId === Number(userId)
             ? message.receiverUsername
             : message.senderUsername}
         </div>
       </div>
 
-      {JSON.stringify(message) !== "{}" && (
+      {JSON.stringify(message) !== "{}" && message && (
         <div className="texts">
           {message.replies && message.replies.length > 0 ? (
             message.replies.map((reply, i) => (
@@ -95,7 +98,9 @@ function Message() {
         </div>
       )}
 
-      <SendMessage isReply={JSON.stringify(message) !== "{}" ? true : false} />
+      <SendMessage
+        isReply={message && JSON.stringify(message) !== "{}" ? true : false}
+      />
     </div>
   );
 }

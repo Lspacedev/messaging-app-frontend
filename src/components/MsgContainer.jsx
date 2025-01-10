@@ -15,7 +15,7 @@ function MsgContainer({ message }) {
     <div className="MsgContainer" onClick={goToMessage}>
       <h4>
         <FaRegEnvelope className="icon" />
-        {message.senderId === Number(userId)
+        {message && message.senderId === Number(userId)
           ? message.receiverUsername
           : message.senderUsername}
       </h4>

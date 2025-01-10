@@ -126,7 +126,7 @@ function Group() {
             </div>
           ))
         ) : (
-          <div>No messages</div>
+          <div style={{ color: "gray" }}>No messages</div>
         )}
       </div>
 

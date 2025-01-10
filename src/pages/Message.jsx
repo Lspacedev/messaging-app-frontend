@@ -90,7 +90,7 @@ function Message() {
               </div>
             ))
           ) : (
-            <div style={{ color: "#0f0f0f" }}>No messages</div>
+            <div style={{ color: "gray" }}>No messages</div>
           )}
         </div>
       )}

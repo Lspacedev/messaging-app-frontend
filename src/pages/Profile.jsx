@@ -43,6 +43,10 @@ function Profile() {
     }
   }
   async function updateProfile() {
+    if (user.username === "Guest") {
+      alert("Cannot update guest account");
+      return;
+    }
     try {
       if (username === "" || email === "") {
         alert("Nothing to update");
@@ -72,6 +76,8 @@ function Profile() {
       navigation(0);
     }
   }
+
+  function handleUpdateToggle() {}
   if (loading) return <div>Loading...</div>;
   if (err !== "") return <div>{err}</div>;
 

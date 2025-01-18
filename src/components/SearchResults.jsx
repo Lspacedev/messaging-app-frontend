@@ -89,45 +89,50 @@ function SearchResults() {
     const friend = userFriends.filter((friend) => friend.friendId == id);
     return friend.length > 0 ? true : false;
   }
-  if (loading) return <div>Loading...</div>;
   if (err !== "") return <div>{err}</div>;
   return (
     <div className="SearchResults">
-      <div className="closebtn" onClick={closeSearchMenu}>
-        <IoCloseOutline />
-      </div>
-      <SearchBar search={search} />
-      <div className="results">
-        {searchResults && searchResults.length !== 0 ? (
-          searchResults.map((user, i) => (
-            <div className="user" key={i}>
-              <div
-                className={user && user.onlineStatus ? "online" : "offline"}
-              ></div>
-              <p>{user && user.username}</p>
-              {user.id != userId ? (
-                <button
-                  onClick={() =>
-                    user && isFriend(user.id)
-                      ? console.log()
-                      : addFriend(user.id)
-                  }
-                >
-                  {user && isFriend(user.id) ? "Friend" : "Add"}
-                </button>
-              ) : (
-                <button>you</button>
-              )}
-            </div>
-          ))
-        ) : searchResults &&
-          searchResults.length === 0 &&
-          searchTerm.length > 0 ? (
-          <div>User not found</div>
-        ) : (
-          <div> </div>
-        )}
-      </div>
+      {loading ? (
+        <div>Loading</div>
+      ) : (
+        <>
+          <div className="closebtn" onClick={closeSearchMenu}>
+            <IoCloseOutline />
+          </div>
+          <SearchBar search={search} />
+          <div className="results">
+            {searchResults && searchResults.length !== 0 ? (
+              searchResults.map((user, i) => (
+                <div className="user" key={i}>
+                  <div
+                    className={user && user.onlineStatus ? "online" : "offline"}
+                  ></div>
+                  <p>{user && user.username}</p>
+                  {user.id != userId ? (
+                    <button
+                      onClick={() =>
+                        user && isFriend(user.id)
+                          ? console.log()
+                          : addFriend(user.id)
+                      }
+                    >
+                      {user && isFriend(user.id) ? "Friend" : "Add"}
+                    </button>
+                  ) : (
+                    <button>you</button>
+                  )}
+                </div>
+              ))
+            ) : searchResults &&
+              searchResults.length === 0 &&
+              searchTerm.length > 0 ? (
+              <div>User not found</div>
+            ) : (
+              <div> </div>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }

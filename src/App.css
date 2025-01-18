@@ -21,6 +21,8 @@ body {
   height: 100vh;
   padding: 0px;
   margin: 0px;
+  background-color: antiquewhite;
+  overflow-x: hidden;
 }
 .Home {
   display: flex;
@@ -218,11 +220,11 @@ body {
   padding: 0px;
 }
 .groups {
-  width: 100%;
+  width: calc(100% - 10px);
   display: flex;
   align-items: center;
   gap: 15px;
-  padding: 15px;
+  padding: 15px 5px;
 }
 
 .group-add-btn {
@@ -664,7 +666,7 @@ body {
   padding: 0px;
 }
 .Login {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -672,24 +674,23 @@ body {
   overflow-y: auto;
 }
 .SignUp {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #383838;
-  overflow-y: auto;
+  overflow-x: hidden;
 }
 .page-container {
-  height: 75%;
-  width: 30%;
+  width: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 25px;
   box-shadow: 1px 0px 3px 1px rgba(71, 71, 71, 0.267);
-  border-radius: 15px;
   backdrop-filter: saturate(180%) blur(10px);
   background-color: whitesmoke;
+  margin: 10px 0px;
+  border-radius: 15px;
 }
 
 .page-container .login-form-div {
@@ -784,19 +785,21 @@ body {
 .dont-have {
   display: flex;
   gap: 5px;
+  padding: 10px;
 }
 
 .dont-have .button {
   cursor: pointer;
 }
-.SignUp .page-container {
+/* .SignUp .page-container {
   height: 85%;
-}
+} */
 
 .logo {
   display: flex;
   align-items: center;
   font-size: 3.5rem;
+  margin: 0px;
 }
 
 .logo .icon {
@@ -816,12 +819,18 @@ body {
   font-size: 7rem;
 }
 @media (max-width: 768px) {
-  .page-container {
-    width: 90%;
-  }
   .Home {
     flex-direction: column;
     overflow-y: auto;
+  }
+
+  .Sidebar {
+    display: flex;
+    flex-direction: column;
+  }
+  .links {
+    display: flex;
+    justify-content: space-evenly;
   }
   .Sidebar .link {
     cursor: pointer;
@@ -850,5 +859,58 @@ body {
   }
   .group-div .form-close {
     margin-right: -10px;
+  }
+
+  .texts div {
+    width: 50%;
+  }
+  .SendMessage {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .SendMessage input[type="text"] {
+    width: 100%;
+    flex: 1;
+  }
+  .SendMessage input[type="file"]::-webkit-file-upload-button,
+  .SendMessage input[type="file"]::file-selector-button {
+    width: 100%;
+    flex: 1;
+    display: flex;
+  }
+
+  .SendMessage button {
+    width: 100%;
+  }
+  .SendGroupMessage {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .SendGroupMessage input[type="text"] {
+    width: 100%;
+    flex: 1;
+  }
+  .SendGroupMessage input[type="file"]::-webkit-file-upload-button,
+  .SendGroupMessage input[type="file"]::file-selector-button {
+    width: 100%;
+    flex: 1;
+    display: flex;
+  }
+
+  .SendGroupMessage button {
+    width: 100%;
+  }
+}
+
+@media (min-width: 769px) {
+  .page-container {
+    width: 40%;
+
+    padding: 10px 0px;
+  }
+  .SignUp .page-container {
+    overflow-x: hidden;
   }
 }

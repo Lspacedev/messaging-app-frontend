@@ -49,31 +49,33 @@ function Sidebar() {
         QUI
         <BiSolidMessageRoundedDots className="icon" />
       </div>
-      <div onClick={goFriends} className="link">
-        <FaUserFriends className="icon" />
-        <h5>Friends</h5>
-      </div>
-      <div>
-        <div onClick={goInbox} className="link">
-          <MdOutlineInbox className="icon" />
-
-          <h5>Inbox</h5>
+      <div className="links">
+        <div onClick={goFriends} className="link">
+          <FaUserFriends className="icon" />
+          <h5>Friends</h5>
         </div>
-      </div>
-      <div onClick={goGroup} className="link">
-        <MdGroups className="icon" />
+        <div>
+          <div onClick={goInbox} className="link">
+            <MdOutlineInbox className="icon" />
 
-        <h5>Groups</h5>
-      </div>
-      <div onClick={goProfile} className="link">
-        <FaUserCircle className="icon" />
+            <h5>Inbox</h5>
+          </div>
+        </div>
+        <div onClick={goGroup} className="link">
+          <MdGroups className="icon" />
 
-        <h5>Profile</h5>
-      </div>
-      <div onClick={logOut} className="link">
-        <MdOutlineLogout className="icon" />
+          <h5>Groups</h5>
+        </div>
+        <div onClick={goProfile} className="link">
+          <FaUserCircle className="icon" />
 
-        <h5>Logout</h5>
+          <h5>Profile</h5>
+        </div>
+        <div onClick={logOut} className="link">
+          <MdOutlineLogout className="icon" />
+
+          <h5>Logout</h5>
+        </div>
       </div>
     </div>
   );

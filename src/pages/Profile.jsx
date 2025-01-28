@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
   const [edit, setEdit] = useState(false);
   const [username, setUsername] = useState("");

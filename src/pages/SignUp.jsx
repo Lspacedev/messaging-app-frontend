@@ -59,12 +59,7 @@ function SignUp() {
             <BiSolidMessageRoundedDots className="icon" />
           </div>
           <h4>Create an account</h4>
-          <div className="dont-have">
-            <div>Already an account?</div>
-            <div className="button" onClick={() => navigation("/")}>
-              Login
-            </div>
-          </div>
+
           {errors &&
             errors.length > 0 &&
             errors.map((err, i) => (
@@ -110,6 +105,12 @@ function SignUp() {
           >
             {loading ? "Loading..." : "Submit"}
           </button>
+          <div className="dont-have">
+            <div>Already an account?</div>
+            <div className="button" onClick={() => navigation("/")}>
+              Login
+            </div>
+          </div>
         </div>
       </div>
     </div>

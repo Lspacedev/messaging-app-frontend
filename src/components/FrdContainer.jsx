@@ -4,14 +4,20 @@ import FriendDetails from "../components/FriendDetails";
 import parseJwt from "../utils/checkToken";
 import { IoCloseOutline } from "react-icons/io5";
 
-function FrdContainer({ friend }) {
+function FrdContainer({ friend, users }) {
   const navigation = useNavigate();
   const [loading, setLoading] = useState(false);
   const [currFriend, setSetCurrFriend] = useState("");
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    getUsers();
+    if (users && users.length > 0) {
+      const [filteredFriend] = data.users.filter(
+        (usr) => usr.id === friend.friendId
+      );
+
+      setUser(filteredFriend);
+    }
   }, [friend]);
   function openFriendMenu() {
     const search = document.querySelector(".FriendDetails");
@@ -68,31 +74,6 @@ function FrdContainer({ friend }) {
       setLoading(false);
     }
   }
-  async function getUsers() {
-    try {
-      setLoading(true);
-      const res = await fetch(`${import.meta.env.VITE_PROD_URL}/users`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (res.ok) {
-        const data = await res.json();
-        const [filteredFriend] = data.users.filter(
-          (usr) => usr.id === friend.friendId
-        );
-
-        setUser(filteredFriend);
-        setLoading(false);
-      }
-    } catch (err) {
-      console.log(err);
-      setLoading(false);
-    }
-  }
-  if (loading) return <div>Loading...</div>;
 
   return (
     <div className="FrdContainer">
@@ -115,7 +96,9 @@ function FrdContainer({ friend }) {
           </div>
         </div>
       </div>
-      <button onClick={goToMessage}>message</button>
+      <button onClick={loading ? () => console.log() : () => goToMessage()}>
+        {loading ? "Loading..." : "message"}
+      </button>
     </div>
   );
 }

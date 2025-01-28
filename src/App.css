@@ -275,6 +275,10 @@ body {
   margin: 5px auto;
   overflow-y: auto;
 }
+.Message .texts p {
+  text-align: start;
+}
+
 .Header {
   display: flex;
   justify-content: flex-end;
@@ -537,6 +541,11 @@ body {
 .Group .name {
   font-size: 0.8rem;
   font-weight: 700;
+  text-align: start;
+}
+
+.Group p {
+  text-align: start;
 }
 
 .group-div {
@@ -710,6 +719,11 @@ body {
   border-radius: 7px;
   font-size: 1rem;
 }
+.login-form-div label {
+  width: 80%;
+  text-align: start;
+}
+
 .login-form-div .submit {
   width: 80%;
   box-sizing: border-box;
@@ -763,11 +777,16 @@ body {
   border-radius: 7px;
   font-size: 1rem;
 }
+.sign-up-form-div label {
+  width: 80%;
+  text-align: start;
+}
+
 .sign-up-form-div .submit {
   width: 80%;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
-  margin: 15px;
+  margin: 0px 15px;
   padding: 15px 15px;
   border: none;
   outline: none;

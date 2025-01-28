@@ -10,7 +10,7 @@ function Groups() {
   const [groupName, setGroupName] = useState("");
 
   const [add, setAdd] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
 
   const { groupId } = useParams();

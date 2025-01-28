@@ -6,7 +6,7 @@ import io from "socket.io-client";
 
 function Message() {
   const [message, setMessage] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
   const { uid } = useParams();
 
@@ -33,8 +33,6 @@ function Message() {
   }, []);
   async function getMessage() {
     try {
-      setLoading(true);
-
       const res = await fetch(
         `${import.meta.env.VITE_PROD_URL}/users/${userId}/messages/${uid}`,
         {

@@ -7,7 +7,7 @@ import io from "socket.io-client";
 function Group() {
   const [group, setGroup] = useState({});
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
   const { groupId } = useParams();
 

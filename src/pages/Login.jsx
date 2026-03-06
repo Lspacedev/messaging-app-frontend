@@ -53,7 +53,7 @@ function Login() {
       if (typeof data.errors !== "undefined") {
         setErrors(data.errors);
       } else {
-        alert(data.message);
+        //alert(data.message);
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.userId);
         navigation("/home");
